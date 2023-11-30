@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Análisis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css">
+</head>
+<body>
+<div class="container">
+    <div class="b_navegacion">
+            <a href="/diagrama" style="font-family: Tahoma; color: #FFFFFF; font-weight: bold;">Diagrama de Venn</a>
+            <a href="/modelo" style="font-family: Tahoma; color: #FFFFFF; font-weight: bold;">Modelo Entidad-Relación</a>
+    </div>
+    <br><br><br>
+    <h1 style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-weight: bold; font-size: 30px;">Análisis Estadístico</h1>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data">
+        <label style="font-family: Tahoma; color: #000000;  font-size: 20px;" for="archivo">Seleccione un archivo Excel (.xlsx):</label>
+        <input style="font-family: Tahoma; color: #000000  font-size: 23px;" type="file" name="archivo" accept=".xlsx" required>
+
+        <br>
+
+        <label style="font-family: Tahoma; color: #000000; font-size: 23px;" for="columna">Nombre de la columna para calcular la suma:</label>
+        <input type="text" name="columna" required>
+
+        <br>
+
+        <button style="font-family: Tahoma; color: #000000; font-size: 20px;" type="submit">Calcular</button>
+    </form>
+<!-- ... (código HTML existente) -->
+
+    {% if contenido_archivo %}
+        <h3 style="font-family: Tahoma; color: #000000; font-weight: bold;  font-size: 23px;">Contenido del Archivo:</h3>
+        <div style="font-family: Tahoma; color: #000000; font-weight: bold;">{{ contenido_archivo | safe }}</div>
+    {% endif %}
+
+<!-- ... (código posterior) ... -->
+    <div class="cont_cards">
+    {% if suma is defined %}
+        <p style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-size: 25px;">La suma de la columna es: {{ suma }}</p>
+    {% endif %}
+
+<!-- ... (código anterior) ... -->
+
+    {% if media is defined %}
+        <p style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-size: 25px;">La media de la columna es: {{ media }}</p>
+    {% endif %}
+
+    {% if moda is defined %}
+        {% if moda %}
+            <p style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-size: 25px;">La moda de la columna es: {{ moda }}</p>
+        {% else %}
+            <p style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-size: 25px;">No hay moda en la columna.</p>
+        {% endif %}
+    {% endif %}
+
+    {% if mediana is defined %}
+        <p style="font-family: Tahoma; color: #000000; font-weight: bold; text-align: center; font-size: 25px;">La mediana de la columna es: {{ mediana }}</p>
+    {% endif %}
+    </div>
+<!-- ... (código posterior) ... -->
+</div>
+</body>
+</html>
